@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTE Justification</title>
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
+    <link rel="stylesheet" href="{% static 'css/boxicons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme-default.css' %}">
+    
+<body>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light"><a>Home</a> / ROI Calculator</span>  
+        </h4>
+        <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <h5 class="card-header">Inputs</h5>
+                <div class="card-body">
+                <form id="fte-justification-form">  
+                  <div>
+                    <table class="table table-borderless">
+                   
+                      <thead>
+                        <tr>
+                          <th>Clinical Trial</th>
+                          <th># of Trials</th>
+                          <th># of Patients</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Solid</strong></td>
+                          <td>
+                            <input type="number" id="solid-trials" value="{{ data.solid_trial }}" style="width: 90px; height: 40px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding-left: 10px;">
+                          </td>
+                          <td>
+                            <input type="number" id="solid-patients" value="{{ data.solid_patient }}" style="width: 90px; height: 40px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding-left: 10px;">
+                          </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Heme</strong></td>
+                            <td>
+                                <input type="number" id="heme-trials" value="{{ data.heme_trial }}" style="width: 90px; height: 40px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding-left: 10px;">
+                            </td>
+                            <td>
+                                <input type="number" id="heme-patients" value="{{ data.heme_patient }}" style="width: 90px; height: 40px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding-left: 10px;">
+                            </td>
+                          </tr>
+                        
+                      </tbody>
+                    </table>
+
+                  </div>
+                    
+                  <input type="submit" value="Calculate" class="btn btn-primary" />
+                </form>
+                </div>
+              </div>
+            </div>
+            <!-- Results -->
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <h5 class="card-header"></h5>
+                <div class="card-body">
+                    <h5 class="card-header">Potential Revenue Loss</h5>
+                    <div>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="2" style="text-align: center">Research Center</th>
+                                    <th colspan="3" style="text-align: center">Standard Care</th>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Monthly</td>
+                                    <td>Yearly</td>
+                                    <td>Monthly</td>
+                                    <td>Yearly</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Solid</strong></td>
+                                    <td style="text-align: right" id="solid_research_monthly">${{ data.solid_research_monthly }}</td>
+                                    <td style="text-align: right" id="solid_research_yearly">${{ data.solid_research_yearly }}</td>
+                                    <td style="text-align: right" id="solid_standard_care_monthly">${{ data.solid_standard_care_monthly }}</td>
+                                    <td style="text-align: right" id="solid_standard_care_yearly">${{ data.solid_standard_care_yearly }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Heme</strong></td>
+                                    <td style="text-align: right" id="heme_research_monthly">${{ data.heme_research_monthly }}</td>
+                                    <td style="text-align: right" id="heme_research_yearly">${{ data.heme_research_yearly }}</td>
+                                    <td style="text-align: right" id="heme_standard_care_monthly">${{ data.heme_standard_care_monthly }}</td>
+                                    <td style="text-align: right" id="heme_standard_care_yearly">${{ data.heme_standard_care_yearly }}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="card-header">FTE Recommendation</h5>
+                    <div>
+                        <table class="table table-borderless" style="width: 40%;">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align: center">Research Center</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4"><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Nurse</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Expert</td>
+                                    <td>{{ data.nurse_expert_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Intermediate</td>
+                                    <td>{{ data.nurse_intermediate_count }}</td>        
+                                </tr>
+                                <tr>
+                                    <td>Novice</td>
+                                    <td>{{ data.nurse_novice_count }}</td>        
+                                </tr>
+                                <tr>
+                                    <td rowspan="4"><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>CRC</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Expert</td>
+                                    <td>{{ data.crc_expert_count }}</td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td>Intermediate</td>
+                                    <td>{{ data.crc_intermediate_count }}</td>        
+                                </tr>
+                                <tr>
+                                    <td>Novice</td>
+                                    <td>{{ data.crc_novice_count }}</td>        
+                                </tr>
+                             
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="card-header">Staffing Cost</h5>
+                    <div>
+                        <table class="table table-borderless" style="width: 50%;">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align: center">Research Center</th>
+                                </tr>
+                            </head>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Primary</strong></td>
+                                    <td id="staff_cost_primary">${{ data.staff_cost_primary }}</td>               
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Admin</strong></td>
+                                    <td id="staff_cost_admin">${{ data.staff_cost_admin }}</td>    
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="background-color: #fff1d6;"><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Potential Profit (yearly)</strong></td>
+                                    <td id="potential_profit_yearly">${{ data.potential_profit_yearly }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>      
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+            $('#fte-justification-form').submit(function(e) {
+                e.preventDefault()
+                var data = {{ data|safe }};
+
+                var solidTrialValue = parseInt(document.getElementById('solid-trials').value);
+                var solidPatientValue = parseInt(document.getElementById('solid-patients').value);
+                var hemeTrialValue = parseInt(document.getElementById('heme-trials').value);
+                var hemePatientValue = parseInt(document.getElementById('heme-patients').value);
+
+                data.solid_trial = solidTrialValue;
+                data.solid_patient = solidPatientValue;
+                data.heme_trial = hemeTrialValue;
+                data.heme_patient = hemePatientValue;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/fte/add-fte-justification/',
+                    data:  JSON.stringify(data),
+                    success: function(response) {
+                        console.log(response.data.solid_trial)
+                        
+                        $('#solid_research_monthly').html('$' + response.data.solid_research_monthly);
+                        $('#solid_research_yearly').html('$' + response.data.solid_research_yearly);
+                        $('#solid_standard_care_monthly').html('$' + response.data.solid_standard_care_monthly);
+                        $('#solid_standard_care_yearly').html('$' + response.data.solid_standard_care_yearly);
+                        $('#heme_research_monthly').html('$' + response.data.heme_research_monthly);
+                        $('#heme_research_yearly').html('$' + response.data.heme_research_yearly);
+                        $('#heme_standard_care_monthly').html('$' + response.data.heme_standard_care_monthly);
+                        $('#heme_standard_care_yearly').html('$' + response.data.heme_standard_care_yearly);
+
+                        $('#staff_cost_primary').html('$' + response.data.staff_cost_primary);
+                        $('#staff_cost_admin').html('$' + response.data.staff_cost_admin);
+                        $('#potential_profit_yearly').html('$' + response.data.potential_profit_yearly);
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        
+                    }
+                }); 
+            });
+        });
+
+    </script>
+</body>
+</html>

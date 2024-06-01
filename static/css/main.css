@@ -1,0 +1,35 @@
+.forecast-heading{
+    font-weight: bold;
+}
+
+.import-error{
+    font-weight: bold;
+    color: red;
+}
+
+.import-created{
+    font-weight: bold;
+    color: green;
+}
+
+.Primary-Coordinator{
+    background-color: #e7f9df;
+    font-weight: bold;
+}
+
+.Secondary-Coordinator{
+    background-color: #e7f9df;
+    text-indent: 1em;
+    display: none;
+}
+
+.Primary-Nurse{
+    background-color: #d7f5fc;
+    font-weight: bold;
+}
+
+.Secondary-Nurse{
+    background-color: #d7f5fc;
+    text-indent: 1em;
+    display: none;
+}
